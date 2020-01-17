@@ -1,0 +1,167 @@
+body {
+	background: #000 url(https://pathofexile.gamepedia.com/media/9/98/Bg.jpg) no-repeat top center;
+	background-size: cover;
+	margin:0;
+	padding:0;
+}
+
+
+#banner {
+    background: rgba(12, 12, 12, 0.85);
+}
+	@font-face {
+		font-family: 'Fontin-Regular';
+		src: url('./Fontin-Regular.ttf') format('truetype');
+	}
+	@font-face {
+		font-family: 'Fontin-SmallCaps';
+		src: url('./Fontin-SmallCaps.ttf') format('truetype');
+	}
+	:root {
+		--bannerHeight: 75px;
+		--bannerTextColor: #dfcf99;
+	}
+	#banner img {
+		height: var(--bannerHeight);
+	}
+	#banner span {
+		font-family: 'Fontin-Regular',Verdana,Arial,Helvetica,sans-serif;
+		color: var(--bannerTextColor);
+		font-size: 3em; 
+		position: relative;
+		top: -18px;
+	}
+	#getPostButton { 
+		top: 0;
+		position: relative;
+	}
+
+	.poeButton {
+		box-shadow: 3px 4px 6px 1px #503622;
+		background:linear-gradient(to bottom, #9e816a 5%, #68462d 100%);
+		background-color:#9e816a;
+		border-radius:5px;
+		border:1px solid #23170f;
+		display:inline-block;
+		cursor:pointer;
+		color:var(--bannerTextColor);
+		font-family: 'Fontin-SmallCaps',Verdana,Arial,Helvetica,sans-serif;
+		font-size:17px;
+		padding:5px 10px;
+		text-decoration:none;
+		text-shadow:0px 1px 0px #7e5739;
+		margin-left: 5px; 
+		margin-bottom: 7px; 
+	}
+	.poeButton:hover {
+		background:linear-gradient(to bottom, #68462d 5%, #9e816a 100%);
+		background-color:#68462d;
+	}
+	.poeButton:active {
+		position:relative;
+		top:1px;
+	}
+
+#grid {
+	margin-top: 20px;
+}
+	#gridControls {
+		width: 638px;
+		margin: 0 auto;
+	}
+
+	#gridTable {
+		margin: 0 auto;
+		background-image: url("../img/grid.png");
+	}
+	:root {
+		--cellSize: 49px;
+	}
+	.cell {
+		border: solid rgba(200, 200, 200, 0.1) 1px;
+		position: relative;
+		height: var(--cellSize);
+		width: var(--cellSize);
+		margin-right: -1px;
+		margin-left: -1px;
+		margin-bottom: -2px;
+	}
+	.cellInput {
+		width: var(--cellSize);
+		height: var(--cellSize);
+		background-color : rgba(12, 12, 12, 0.25); 
+		border: none;
+		color: white;
+		font-size: 1.2em;
+		position: absolute;
+		background-size: contain;
+		background-repeat: no-repeat;
+	}
+	#clearGridButton {
+		position: relative;
+	}
+	.tooltiptext {
+		visibility: hidden;
+		width: 120px;
+		background-color: #555;
+		color: #fff;
+		text-align: center;
+		border-radius: 6px;
+		padding: 5px 0;
+		position: absolute;
+		z-index: 1;
+		bottom: 125%;
+		left: 50%;
+		margin-left: -60px;
+		opacity: 0;
+		transition: opacity 0.3s;
+	  }
+	  
+	  .tooltiptext::after {
+		content: "";
+		position: relative;
+		top: 30px;
+		left: -32%;
+		margin-left: -5px;
+		border-width: 5px;
+		border-style: solid;
+		border-color: #555 transparent transparent transparent;
+	  }
+	  
+	  #clearGridButton:hover .tooltiptext {
+		visibility: visible;
+		opacity: 1;
+	  }
+	  .cell:hover .tooltiptext {
+		visibility: visible;
+		opacity: 1;
+	  }
+
+#post {
+	margin-top: 24px;
+	width: 100%;
+}
+	#post textarea {
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 40px;
+		background: rgba(12, 12, 12, .95);
+		color: white;
+	}
+	:root {
+		--blueText: #9cdcfe;
+		--redText: #f48771;
+		--greenText: #b5cea8;
+		--whiteText: #d4d4d4;
+	}
+	
+
+#stashModal {
+	font-family: Arial, Helvetica, sans-serif;
+}
+	#stashModal textarea {
+		margin: 15px;
+	}
+	.modal a.close-modal {
+		background-image: url("../img/x.png");
+	}

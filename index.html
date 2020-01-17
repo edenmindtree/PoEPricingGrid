@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head>
+    <title>PoE Pricing Grid</title>
+    <!-- jQuery Google CDN-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+    <!-- Custom Urls -->
+    <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+
+    <link href="./img/favicon.png" rel="icon" sizes="32x32" type="image/png">
+</head>
+<body>
+
+<div id="banner">
+    <img src="./img/logo.png" alt="poe logo" />
+    <span>PoE Pricing Grid</span>
+
+</div>
+
+<section id="gridContent">
+    <div id="grid">
+        <div id="gridControls">
+            <button class="poeButton" id="getPostButton">Generate Post</button>
+            <button class="poeButton" id="importPostButton">Import Post</button>
+            <a href="#stashModal" rel="modal:open" class="poeButton">Import Stash</a>
+            <div id="stashModal" class="modal">
+                <a id="myStashUrl" href="" target="_blank">Click here and paste result into text area.</a>
+                <textarea id="stashTextArea" rows="15" cols="50"></textarea>
+                <br/>
+                <a class="poeButton" rel="modal:close">Close</a>
+                <a class="poeButton" id="importStashButton" rel="modal:close">Import</a>
+              </div>
+
+            <div class="poeButton" id="clearGridButton">X<span class="tooltiptext">Clear Grid</span></div>
+        </div>
+        <table id="gridTable">
+
+        </table>
+    </div> 
+</section>
+
+<section id="postContent">
+    <div id="post">
+        <textarea id="postTextArea" rows="26" cols="88">
+        </textarea>
+    </div> 
+</section>
+
+<script type="application/javascript" src="./js/grid.js"></script>
+<script type="application/javascript" src="./js/stash.js"></script>
+<script>
+    // Load these functions on page load
+    (function() {
+        RenderGrid();
+        SetStashUrl();
+    })();
+</script>
+</body>
+</html>
