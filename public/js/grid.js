@@ -46,7 +46,7 @@ function RenderGrid() {
  */
 document.getElementById('getPostButton').onclick = function() {
 
-	const league = `Metamorph`;
+	const league = `Delirium`;
 	const cellInput = document.getElementsByClassName('cellInput');
 	var postText = [];
 

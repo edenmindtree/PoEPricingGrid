@@ -4,7 +4,7 @@
 function SetStashUrl() {
     // must be logged into PoE with username
     const userName = `edenmind`;
-    const league = `Metamorph`;
+    const league = `Delirium`;
     const stashNUmber = 5; // Stash numbers start at 0
     const myStashUrl = `https://www.pathofexile.com/character-window/get-stash-items?league=${league}&tabs=1&tabIndex=${stashNUmber}&accountName=${userName}`;
     // set href on UI
@@ -23,6 +23,8 @@ document.getElementById('importStashButton').onclick = function() {
     var items = responseObj.items;
     var tab = responseObj.tabs;
 
+    console.log(items);
+
     for(var i = 0; i < items.length; i++) {
         // get item data
         var url = items[i].icon;
@@ -39,6 +41,9 @@ document.getElementById('importStashButton').onclick = function() {
                 // set image icon
                 cellImages[j].style.backgroundImage = `url("${url}")`;
 
+                // set price
+                cellImages[j].value = (items[i].note).split("~price ")[1];
+
                 // set tooltip
                 var itemToolTip = document.createElement("span");
                 itemToolTip.className = (`tooltiptext`);
@@ -51,4 +56,31 @@ document.getElementById('importStashButton').onclick = function() {
             }
         }
     }
+    SetStashPricePost();
 }
+
+
+/**
+ * Function to get and display the forum post
+ */
+function SetStashPricePost() {
+
+	const league = `Delirium`;
+	const cellInput = document.getElementsByClassName('cellInput');
+	var postText = [];
+
+	for(var i=0; i < cellInput.length; i++) {
+		var thisInputValue = cellInput[i].value;
+		if(thisInputValue !== "") {
+
+			const y = cellInput[i].getAttribute("y");
+			const x = cellInput[i].getAttribute("x");
+			
+			postText.push(`[linkItem location="Stash6" league="${league}" x="${x}" y="${y}"]`);
+			postText.push(`~b/o ${thisInputValue}`);
+		}
+	}
+
+	postText = postText.join("\n");
+	document.getElementById('postTextArea').value = postText;
+};
