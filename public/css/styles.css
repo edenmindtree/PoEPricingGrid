@@ -62,6 +62,14 @@ body {
 		top:1px;
 	}
 
+	#cookie-container {
+		float: right;
+		color:var(--bannerTextColor);
+		font-family: 'Fontin-SmallCaps',Verdana,Arial,Helvetica,sans-serif;
+		margin-top: 16px;
+    	margin-right: 18px;
+	}
+
 #grid {
 	margin-top: 20px;
 }
