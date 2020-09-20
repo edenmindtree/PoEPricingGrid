@@ -16,7 +16,7 @@ app.get(`/stash/:league/:username/:stashNumber`, async (req, res,) => {
             `https://www.pathofexile.com/character-window/get-stash-items?league=${req.params.league}&tabs=1&tabIndex=${req.params.stashNumber}&accountName=${req.params.username}`,
             {
                 headers: {
-                    cookie: "_ga=GA1.2.1614616722.1560806896; stored_data=1; POESESSID=36d889f906d82dbe181acca0bdb4602b; __cfduid=d765415bb96aba231e044cb202fe3c3d21584064036"
+                    cookie: "_ga=GA1.2.1614616722.1560806896; __cfduid=da54b77dfe682e2a5dc5773eedb2fa2ca1598736064; stored_data=1; cf_clearance=e91264b82b3c334f7fdf45ee1f0954d2c6a9f479-1600479432-0-1zd2cfb7daz8f417b34z39551240-150; POESESSID=6c216be86d1f1946d8ace6e18e1ef9f9"
                 }
             }
         )

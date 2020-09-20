@@ -10,6 +10,7 @@
 
     <!-- Custom Urls -->
     <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="./css/dark-input.css" />
 
     <link href="./img/favicon.png" rel="icon" sizes="32x32" type="image/png">
 </head>
@@ -19,28 +20,17 @@
     <img src="./img/logo.png" alt="poe logo" />
     <span>PoE Pricing Grid</span>
 
-    <div id="cookie-container">
+    <!-- <div id="cookie-container">
         Cookie: <input type="text" name="cookie" id="cookie" value=""/>
-    </div>
+    </div> -->
 
 </div>
 
 <section id="gridContent">
     <div id="grid">
         <div id="gridControls">
-            <button class="poeButton" id="getPostButton">Generate Post</button>
-            <button class="poeButton" id="importPostButton">Import Post</button>
             <button class="poeButton" id="importStashButton">Import Stash</button>
-            <!-- <a href="#stashModal" rel="modal:open" class="poeButton">Import Stash</a> -->
-            <!-- <div id="stashModal" class="modal">
-                <a id="myStashUrl" href="" target="_blank">Click here and paste result into text area.</a>
-                <textarea id="stashTextArea" rows="15" cols="50"></textarea>
-                <br/>
-                <a class="poeButton" rel="modal:close">Close</a>
-                <a class="poeButton" id="importStashButton" rel="modal:close">Import</a>
-              </div> -->
-
-            <div class="poeButton" id="clearGridButton">X<span class="tooltiptext">Clear Grid</span></div>
+            <input type="text" class="css-input" id="currentStashIndex" value="5" />
         </div>
         <table id="gridTable">
 
@@ -61,7 +51,6 @@
     // Load these functions on page load
     (function() {
         RenderGrid();
-        SetStashUrl();
     })();
 </script>
 </body>

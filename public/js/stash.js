@@ -1,21 +1,8 @@
 const stash = {
-    league: `Delirium`,
+    league: `Heist`,
     userName: `edenmind`,
-    stashNUmber: 5,
+    stashNumber: 5,
     baseUrl: "http://localhost:3000"
-}
-
-/**
- * Function to set the stash grid overlay
- */
-function SetStashUrl() {
-    // must be logged into PoE with username
-    // const userName = `edenmind`;
-    // const league = `Delirium`;
-    // const stashNUmber = 5; // Stash numbers start at 0
-    // const myStashUrl = `https://www.pathofexile.com/character-window/get-stash-items?league=${league}&tabs=1&tabIndex=${stashNUmber}&accountName=${userName}`;
-    // // set href on UI
-    // document.getElementById('myStashUrl').href = myStashUrl;
 }
 
 /**
@@ -25,37 +12,46 @@ function SetStashUrl() {
 document.getElementById('importStashButton').onclick = function() {
     ClearGrid(true, true);
     // Get stash items from my logged-in PoE stash
-    // var responseText = document.getElementById("stashTextArea").value;
-
-    var responseText = $.get(`${stash.baseUrl}/stash/${stash.league}/${stash.userName}/${stash.stashNUmber}`, function( data ) {
-        //$( ".result" ).html( data );
+    var inputValue = document.getElementById("currentStashIndex").value;
+    if(inputValue && !isNaN(inputValue) ) {
+        stash.stashNumber = inputValue;
+    }
+    else {
+        document.getElementById("currentStashIndex").value = "5";
+    }
+    
+    console.log("Stash URL:", `https://www.pathofexile.com/character-window/get-stash-items?league=${stash.league}&tabs=1&tabIndex=${stash.stashNumber}&accountName=${stash.userName}`);
+    
+    var requestUrl = `${stash.baseUrl}/stash/${stash.league}/${stash.userName}/${stash.stashNumber}`;
+    var stashRequest = $.get(requestUrl,function( data ) {
         console.log(data);
-
+        
         var items = data.items;
         var tab = data.tabs;
     
         for(var i = 0; i < items.length; i++) {
             // get item data
-            var url = items[i].icon;
+            var iconUrl = items[i].icon;
             var y = items[i].y;
             var x = items[i].x;
-            const league = items[i].league;
             const name = items[i].name;
             const typeLine = items[i].typeLine;
     
             // set image to input on grid
-            var cellImages = document.getElementsByClassName("cellInput");
-            for(var j = 0; j < cellImages.length; j++) {
-                if(cellImages[j].getAttribute('y') === `${y}` && cellImages[j].getAttribute('x') === `${x}`) {
+            var cells = document.getElementsByClassName("cell");
+            for(var j = 0; j < cells.length; j++) {
+                if(cells[j].getAttribute('y') === `${y}` && cells[j].getAttribute('x') === `${x}`) {
                     // set image icon
-                    cellImages[j].style.backgroundImage = `url("${url}")`;
+                    var imgElement = document.createElement('img');
+                    imgElement.id = `img-${j}`;
+                    imgElement.src = iconUrl;
+                    cells[j].appendChild(imgElement);
     
                     // set price
                     if(items[i].note) {
-                        cellImages[j].value = (items[i].note).replace("~price ", "");
+                        cells[j].setAttribute("price", items[i].note.replace("~price ", ""));
                     }
-                    
-    
+
                     // set tooltip
                     var itemToolTip = document.createElement("span");
                     itemToolTip.className = (`tooltiptext`);
@@ -64,7 +60,7 @@ document.getElementById('importStashButton').onclick = function() {
                         var separator = ``;
                     }
                     itemToolTip.innerHTML = (`${name}${separator}${typeLine}`);
-                    cellImages[j].parentElement.appendChild(itemToolTip);
+                    cells[j].appendChild(itemToolTip);
                 }
             }
         }
@@ -77,17 +73,17 @@ document.getElementById('importStashButton').onclick = function() {
  * Function to get and display the forum post
  */
 function SetStashPricePost() {
-	const cellInput = document.getElementsByClassName('cellInput');
+	const cells = document.getElementsByClassName('cell');
 	var postText = [];
 
-	for(var i=0; i < cellInput.length; i++) {
-		var thisInputValue = cellInput[i].value;
-		if(thisInputValue !== "") {
+	for(var i=0; i < cells.length; i++) {
+		var thisInputValue = cells[i].getAttribute("price");
+		if(thisInputValue && thisInputValue !== "") {
 
-			const y = cellInput[i].getAttribute("y");
-			const x = cellInput[i].getAttribute("x");
-			
-			postText.push(`[linkItem location="Stash6" league="${stash.league}" x="${x}" y="${y}"]`);
+			const y = cells[i].getAttribute("y");
+			const x = cells[i].getAttribute("x");
+			let stashNumber = parseInt(stash.stashNumber) + 1;
+			postText.push(`[linkItem location="Stash${stashNumber}" league="${stash.league}" x="${x}" y="${y}"]`);
 			postText.push(`~b/o ${thisInputValue}`);
 		}
 	}
